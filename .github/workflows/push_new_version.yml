@@ -30,7 +30,7 @@ jobs:
     name: "Add a Tag to the Repo"
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: GitHub Tag
         uses: mathieudutour/github-tag-action@v6.0
@@ -46,7 +46,7 @@ jobs:
     needs:
       - tag_repo
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set Variables
         id: variables
