@@ -53,20 +53,21 @@ jobs:
         run: |
           echo "::set-output name=dkimagepath::intrapt/zomboid-dedicated-server"
           echo "::set-output name=ghimagepath::intrapt/zomboid-dedicated-server"
-          echo "::set-output name=qyimagepath::intrapt/zomboid-dedicated-server"
           echo "::set-output name=datetime::$(date +%Y%m%dT%H%M%SZ)"
 
-      - name: Login to Image Repositories
-        run: |
-          docker login -u ${{ secrets.DOCKER_USER }} -p ${{ secrets.DOCKER_TOKEN }} docker.io
+      - name: Login to Docker Hub
+        run: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
 
       # Login against a Docker registry except on PR
       # https://github.com/docker/login-action
-      - name: Log into registry ${{ env.REGISTRY }}
+      - name: Log in to the Container registry
         if: github.event_name != 'pull_request'
-        uses: docker/login-action@343f7c4344506bcbf9b4de18042ae17996df046d # v3.0.0
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
         with:
-          registry: ${{ env.REGISTRY }}
+          registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
