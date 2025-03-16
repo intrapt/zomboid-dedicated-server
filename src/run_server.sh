@@ -244,7 +244,7 @@ function set_variables() {
 ## Main
 set_variables
 apply_preinstall_config
-update_server
+[ "$DISABLE_AUTOMATIC_UPDATES" != "true" ] && update_server
 test_first_run
 apply_postinstall_config
 
