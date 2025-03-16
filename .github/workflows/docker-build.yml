@@ -126,7 +126,7 @@ jobs:
       - name: Build the Docker-Compose Image
         if: ${{ success() && matrix.system == 'docker-compose' }}
         run: |
-          docker-compose build
+          docker compose build
 
       - name: Test Run the Docker-Compose Image
         if: ${{ success() && matrix.system == 'docker-compose' }}
@@ -139,7 +139,7 @@ jobs:
               "rcon -a $(cat ZomboidConfig/ip.txt):\${RCON_PORT} -p \${RCON_PASSWORD} quit") &
 
           # Run the Docker-Compose Image
-          docker-compose up \
+          docker compose up \
             2>&1 | tee ./docker-log.log
 
       #######################
