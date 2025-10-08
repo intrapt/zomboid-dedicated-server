@@ -35,6 +35,8 @@ LABEL com.renegademaster.zomboid-dedicated-server.authors="Renegade-Master" \
 # Copy the source files
 COPY src /home/steam/
 
++RUN sed -i -re 's/archive.ubuntu.com|security.ubuntu.com/old-releases.ubuntu.com/g' /etc/apt/sources.list
+
 # Install Python, and take ownership of rcon binary
 RUN sed -i 's|http://[^ ]*|http://old-releases.ubuntu.com/ubuntu|g' /etc/apt/sources.list \
     && apt-get update && apt-get upgrade -y \
